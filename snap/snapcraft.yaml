@@ -19,7 +19,7 @@ parts:
   copy-stuff:
     plugin: dump
     source: .
-     organize:
+    organize:
       'bin/' : _bin_offline/
   andy-py-stuff:
     plugin: python
