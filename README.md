@@ -18,11 +18,13 @@ which will build and install the snap. Then to run it - twice with different ent
 
 The `$SNAP` reference
 
-    command: bin/python3 $SNAP/main.py
+    command: bin/python3 $SNAP/src/main.py
 
 refers to the prime directory, which is what is ultimately copied into the resulting snap file created.  The reference to python is `bin/python` which could be `$SNAP/bin/python3` as the location of the venv/bin directory seems to end up in the prime directory as `bin`.  The command could be simplified to
 
-    command: bin/python3 main.py
+    command: bin/python3 src/main.py
+
+confirmed.  That works.
 
 ## Verify the contents of the snap
 
@@ -38,13 +40,12 @@ where `squashfs-root/` is the `prime` directory during build.  E.g.
     squashfs-root/bin/python
     squashfs-root/bin/python3
     squashfs-root/bin/python3.9
-    squashfs-root/main.py
-    squashfs-root/requirements.txt
+    squashfs-root/src/main.py
     etc.
 
-After installation, check
+After installation
 
     $ ls /snap/andy-snap-python-hello/
 
-to see what is copied to your file system from the .snap file - this is what is being ultimately run.
+to see what is actually being copied to your file system from the .snap file - this is what is being ultimately run.
 

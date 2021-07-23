@@ -1,12 +1,12 @@
 name: andy-snap-python-hello
-version: '0.7'
+version: '0.6'
 summary: 'Simple python CLI test app'
 description: |
   Simple python CLI test app
   supporting my article on python snaps https://medium.com/p/ccca7ae537a3/edit
 grade: stable # devel # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
-base: core18
+base: core20
 
 apps:
     andy-snap-python-hello:
@@ -52,8 +52,8 @@ parts:
       - libnotify-dev
       - freeglut3
       - ibus-gtk3
-      - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
-      # - libwebkit2gtk-4.0-37
+      # - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
+      - libwebkit2gtk-4.0-37
       - zlib1g
       - libsm6
       - libpulse0
