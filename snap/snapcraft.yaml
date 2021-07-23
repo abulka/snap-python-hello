@@ -1,5 +1,5 @@
 name: andy-snap-python-hello
-version: '0.5'
+version: '0.6'
 summary: 'Simple python CLI test app'
 description: |
   Simple python CLI test app
