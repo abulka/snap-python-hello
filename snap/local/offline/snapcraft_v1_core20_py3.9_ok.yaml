@@ -1,5 +1,5 @@
 name: andy-snap-python-hello
-version: '0.4'
+version: '0.5'
 summary: 'Simple python CLI test app'
 description: |
   Simple python CLI test app
@@ -19,6 +19,8 @@ parts:
   copy-stuff:
     plugin: dump
     source: .
+    organize:
+      'bin/' : _bin_offline/
   andy-py-stuff:
     plugin: python
     # python-version: python3  # core20, remove cos error: Additional properties are not allowed ('python-version' was unexpected)

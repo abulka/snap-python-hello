@@ -10,7 +10,8 @@ base: core20
 
 apps:
     andy-snap-python-hello:
-        command: bin/python3 $SNAP/main.py
+        # command: $SNAP/bin/python3 $SNAP/src/main.py
+        command: bin/python3 src/main.py
         plugs: [home, gsettings, network]
     python-v:
         command: bin/python3 -V
@@ -18,9 +19,9 @@ apps:
 parts:
   copy-stuff:
     plugin: dump
-    source: .
-    organize:
-      'bin/' : _bin_offline/
+    source: ./src
+    # organize:
+    #   'bin/' : _bin_offline/
   andy-py-stuff:
     plugin: python
     # python-version: python3  # core20, remove cos error: Additional properties are not allowed ('python-version' was unexpected)

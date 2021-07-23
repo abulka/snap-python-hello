@@ -7,3 +7,6 @@ The reason our script bin/ is included in the prime DIR is because we copy every
     source: .
 
 I wish we could exclude the bin dir?  Solution: well, we can 'organise' and rename files and directories so yes, we can exclude it.
+
+Even better, put the stuff we want copied into src/ and thus we avoid the whole problem of copying in stuff we don't need
+
