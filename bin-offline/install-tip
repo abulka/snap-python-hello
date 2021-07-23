@@ -1,1 +1,0 @@
-echo sudo snap install --devmode --dangerous andy-snap-python-hello_0.2_amd64.snap

@@ -1,0 +1,9 @@
+The reason the bin directory was renamed offline is because this snapcraft copy involves a venv, which ends up in the prime/bin directory - which conflicts with the existence of bin/ 
+
+The reason our script bin/ is included in the prime DIR is because we copy everything in the source directory
+
+  copy-stuff:
+    plugin: dump
+    source: .
+
+I wish we could exclude the bin dir?  Solution: well, we can 'organise' and rename files and directories so yes, we can exclude it.

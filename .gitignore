@@ -1,2 +1,4 @@
 *.snap
 mysnap_artifact.zip
+mysnap_artifact/
+old_snaps/
