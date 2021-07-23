@@ -1,0 +1,56 @@
+name: andy-snap-python-hello
+version: '0.2'
+summary: 'Simple python CLI test app'
+description: |
+  Simple python CLI test app
+  supporting my article on python snaps https://medium.com/p/ccca7ae537a3/edit
+grade: stable # devel # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+base: core20
+
+apps:
+    andy-snap-python-hello:
+        command: bin/python3 $SNAP/main.py
+        plugs: [home, gsettings, network]
+
+parts:
+  copy-stuff:
+    plugin: dump
+    source: .
+  andy-py-stuff:
+    plugin: python
+    # python-version: python3  # core20, remove cos error: Additional properties are not allowed ('python-version' was unexpected)
+    source: .
+    build-packages:
+      - python3.8-venv
+      - python3.8-dev
+    build-environment:
+      - SNAPCRAFT_PYTHON_INTERPRETER: python3.8
+    override-build: |
+      # Workaround a bug in snapcraft python plugin
+      # https://forum.snapcraft.io/t/build-a-snap-with-any-version-of-python-i-want/10420/8
+      rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/distutils
+      ln -s /usr/lib/python3.8/distutils $SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/distutils
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/include/
+      ln -s /usr/include/python3.8 $SNAPCRAFT_PART_INSTALL/usr/include/python3.8
+      apt-get install --yes curl
+      curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
+      snapcraftctl build      
+    stage-packages:
+      - python3.8-venv
+      - libssl-dev
+      - libjpeg-dev
+      - libtiff-dev
+      - libsdl1.2-dev
+      - libnotify-dev
+      - freeglut3
+      - ibus-gtk3
+      # - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
+      - libwebkit2gtk-4.0-37
+      - zlib1g
+      - libsm6
+      - libpulse0
+      - libslang2
+      - libsdl1.2debian
+    requirements:
+      - /root/project/requirements.txt
