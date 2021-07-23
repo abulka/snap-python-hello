@@ -11,7 +11,8 @@ base: core18
 apps:
     andy-snap-python-hello:
         # command: $SNAP/bin/python3 $SNAP/src/main.py
-        command: $SNAP/bin/python3 src/main.py
+        # command: $SNAP/bin/python3 src/main.py  # still auto-corrects to usr/bin/python3 - The command '$SNAP/bin/python3 src/main.py' has been changed to 'usr/bin/python3 src/main.py'.
+        command: ./bin/python3 src/main.py
         plugs: [home, gsettings, network]
     python-v:
         command: bin/python3 -V
