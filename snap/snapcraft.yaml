@@ -52,8 +52,8 @@ parts:
       - libnotify-dev
       - freeglut3
       - ibus-gtk3
-      - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
-      # - libwebkit2gtk-4.0-37
+      # - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
+      - libwebkit2gtk-4.0-37
       - zlib1g
       - libsm6
       - libpulse0
