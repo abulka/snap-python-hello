@@ -27,24 +27,24 @@ parts:
     # python-version: python3  # core20, remove cos error: Additional properties are not allowed ('python-version' was unexpected)
     source: .
     build-packages:
-      - python3.8-venv
-      - python3.8-dev
+      - python3.9-venv
+      - python3.9-dev
     build-environment:
-      - SNAPCRAFT_PYTHON_INTERPRETER: python3.8
+      - SNAPCRAFT_PYTHON_INTERPRETER: python3.9
     override-build: |
       # Workaround a bug in snapcraft python plugin
       # https://forum.snapcraft.io/t/build-a-snap-with-any-version-of-python-i-want/10420/8
-      rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/distutils
-      ln -s /usr/lib/python3.8/distutils $SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/distutils
+      rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/python3.9/distutils
+      ln -s /usr/lib/python3.9/distutils $SNAPCRAFT_PART_INSTALL/usr/lib/python3.9/distutils
       mkdir -p $SNAPCRAFT_PART_INSTALL/usr/include/
-      ln -s /usr/include/python3.8 $SNAPCRAFT_PART_INSTALL/usr/include/python3.8
+      ln -s /usr/include/python3.9 $SNAPCRAFT_PART_INSTALL/usr/include/python3.9
       apt-get install --yes curl
       curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
 
       # To run Snapcraft’s original build implementation from within override-build, run snapcraftctl build. This can be run before or after any custom script or omitted entirely. https://snapcraft.io/docs/snapcraft-parts-metadata#heading--source 
       snapcraftctl build
     stage-packages:
-      - python3.8-venv
+      - python3.9-venv
       - libssl-dev
       - libjpeg-dev
       - libtiff-dev

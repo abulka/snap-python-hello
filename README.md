@@ -49,3 +49,9 @@ After installation
 
 to see what is actually being copied to your file system from the .snap file - this is what is being ultimately run.
 
+## core20 vs core18
+
+Unfortunately I couldn't get it working with core18 since I got the error 
+
+    Could not find a required package in 'build-packages': python3.9-venv
+
