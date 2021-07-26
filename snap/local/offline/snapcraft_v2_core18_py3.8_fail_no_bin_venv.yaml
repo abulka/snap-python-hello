@@ -1,5 +1,5 @@
 name: andy-snap-python-hello
-version: '0.7'
+version: '0.91'
 summary: 'Simple python CLI test app'
 description: |
   Simple python CLI test app
@@ -8,22 +8,14 @@ grade: stable # devel # must be 'stable' to release into candidate/stable channe
 confinement: strict # use 'strict' once you have the right plugs and slots
 base: core18
 
-# to get latest python 3.9 for core18 which isn't officially available
-package-repositories:
- - type: apt
-   ppa: deadsnakes/ppa
-
 apps:
     andy-snap-python-hello:
         # command: $SNAP/bin/python3 $SNAP/src/main.py
-        command: python3.9 src/main.py
+        # command: $SNAP/bin/python3 src/main.py  # still auto-corrects to usr/bin/python3 - The command '$SNAP/bin/python3 src/main.py' has been changed to 'usr/bin/python3 src/main.py'.
+        command: ./bin/python3 src/main.py
         plugs: [home, gsettings, network]
     python-v:
-        command: python -V
-    python3-v:
-        command: python3 -V
-    python39-v:
-        command: python3.9 -V
+        command: bin/python3 -V
         
 parts:
   copy-stuff:
@@ -33,27 +25,27 @@ parts:
     #   'bin/' : _bin_offline/
   andy-py-stuff:
     plugin: python
-    # python-version: python3  # core20, remove cos error: Additional properties are not allowed ('python-version' was unexpected)
+    python-version: python3  # ok in core18, if core20, remove cos error: Additional properties are not allowed ('python-version' was unexpected)
     source: .
     build-packages:
-      - python3.9-venv
-      - python3.9-dev
+      - python3.8-venv
+      - python3.8-dev
     build-environment:
-      - SNAPCRAFT_PYTHON_INTERPRETER: python3.9
+      - SNAPCRAFT_PYTHON_INTERPRETER: python3.8
     override-build: |
       # Workaround a bug in snapcraft python plugin
       # https://forum.snapcraft.io/t/build-a-snap-with-any-version-of-python-i-want/10420/8
-      rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/python3.9/distutils
-      ln -s /usr/lib/python3.9/distutils $SNAPCRAFT_PART_INSTALL/usr/lib/python3.9/distutils
+      rm -rf $SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/distutils
+      ln -s /usr/lib/python3.8/distutils $SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/distutils
       mkdir -p $SNAPCRAFT_PART_INSTALL/usr/include/
-      ln -s /usr/include/python3.9 $SNAPCRAFT_PART_INSTALL/usr/include/python3.9
+      ln -s /usr/include/python3.8 $SNAPCRAFT_PART_INSTALL/usr/include/python3.8
       apt-get install --yes curl
       curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
 
       # To run Snapcraft’s original build implementation from within override-build, run snapcraftctl build. This can be run before or after any custom script or omitted entirely. https://snapcraft.io/docs/snapcraft-parts-metadata#heading--source 
       snapcraftctl build
     stage-packages:
-      - python3.9-venv
+      - python3.8-venv
       - libssl-dev
       - libjpeg-dev
       - libtiff-dev
@@ -61,8 +53,8 @@ parts:
       - libnotify-dev
       - freeglut3
       - ibus-gtk3
-      - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
-      # - libwebkit2gtk-4.0-37
+      # - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
+      - libwebkit2gtk-4.0-37
       - zlib1g
       - libsm6
       - libpulse0
