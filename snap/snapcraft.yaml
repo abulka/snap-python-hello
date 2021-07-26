@@ -1,5 +1,5 @@
 name: andy-snap-python-hello
-version: '0.7'
+version: '0.91'
 summary: 'Simple python CLI test app'
 description: |
   Simple python CLI test app
@@ -18,8 +18,8 @@ apps:
         # command: $SNAP/bin/python3 $SNAP/src/main.py
         command: python3.9 src/main.py
         plugs: [home, gsettings, network]
-    python-v:
-        command: python -V
+    # python-v:
+    #     command: python -V  # <--- doesn't work because 'python' doesn't exist, only python3 and python3.9 and python 3.6 do
     python3-v:
         command: python3 -V
     python39-v:
@@ -61,8 +61,9 @@ parts:
       - libnotify-dev
       - freeglut3
       - ibus-gtk3
-      - libwebkitgtk-3.0-0 <------ the only change core18 -> core20 in this stage-packages section
-      # - libwebkit2gtk-4.0-37
+      # - libwebkitgtk-3.0-0 <------ core18
+      # - libwebkit2gtk-4.0-37 <------ core20
+      - libwebkitgtk-3.0-0
       - zlib1g
       - libsm6
       - libpulse0
