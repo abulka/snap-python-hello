@@ -1,0 +1,1 @@
+time snapcraft --shell-after --debug
